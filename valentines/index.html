@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Be My Valentine? 💕</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 50px;
+        background-color: pink;
+      }
+
+      h1 {
+        font-size: 24px;
+        color: #d63384;
+      }
+
+      .gif-container {
+        margin-top: 20px;
+      }
+
+      .buttons {
+        margin-top: 20px;
+      }
+
+      button {
+        font-size: 20px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 10px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      #yes {
+        background-color: #ff69b4;
+        color: white;
+      }
+
+      #no {
+        background-color: #ff4d4d;
+        color: white;
+      }
+
+      /* Make the GIF move left and right */
+      @keyframes moveGif {
+        0% {
+          transform: translateX(-20px);
+        }
+        50% {
+          transform: translateX(20px);
+        }
+        100% {
+          transform: translateX(-20px);
+        }
+      }
+
+      .gif-container img {
+        width: 150px;
+        height: auto;
+        animation: moveGif 2s infinite alternate ease-in-out;
+      }
+
+      /* Pop-up message styling */
+      .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        display: none;
+        z-index: 100;
+      }
+
+      .popup h2 {
+        color: #ff4d79;
+      }
+
+      .popup img {
+        width: 120px;
+        margin: 10px 0;
+      }
+
+      .popup button {
+        background-color: #ff69b4;
+        color: white;
+        font-size: 18px;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-top: 10px;
+      }
+
+      /* Blurred background effect */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        display: none;
+        z-index: 99;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Will you be my Valentine? 💖</h1>
+
+    <div class="gif-container">
+      <img
+        src="https://media.giphy.com/media/v6aOjy0Qo1fIA/giphy.gif"
+        alt="Cute Cat GIF"
+      />
+    </div>
+
+    <div class="buttons">
+      <button id="yes" onclick="sayYes()">Yes 💘</button>
+      <button id="no" onclick="makeYesBigger()">No 💔</button>
+    </div>
+
+    <!-- Creative Popup Message -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+      <h2>Yay! 🎉 You made my day! 💖</h2>
+      <img
+        src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
+        alt="Happy GIF"
+      />
+      <p>You are the best! 💕 Wishing you a Happy Valentine's Day! 🥰</p>
+      <button onclick="closePopup()">Awww! 💖</button>
+    </div>
+
+    <script>
+      let yesButton = document.getElementById("yes");
+      let noButton = document.getElementById("no");
+      let yesSize = 20;
+
+      let noTexts = [
+        "Are you sure? 😢",
+        "Really? 🥺",
+        "Think again! 😿",
+        "Please? 🥰",
+        "You can't say no forever! 😆",
+        "Just click yes already! 😤",
+        "You know you want to! 😏",
+        "Don't break my heart 💔",
+        "Last chance! 🤨",
+        "Okay, now it's getting big! 😳",
+      ];
+
+      let clickCount = 0;
+
+      function makeYesBigger() {
+        yesSize += 20;
+        yesButton.style.fontSize = yesSize + "px";
+        yesButton.style.padding = yesSize / 2 + "px " + yesSize + "px";
+
+        // Change No button text
+        if (clickCount < noTexts.length) {
+          noButton.innerText = noTexts[clickCount];
+          clickCount++;
+        } else {
+          noButton.innerText = "Too late! 😈";
+        }
+
+        // If Yes button gets too big, make it fill the screen
+        if (yesSize > 200) {
+          yesButton.style.width = "100vw";
+          yesButton.style.height = "100vh";
+          yesButton.style.fontSize = "50px";
+        }
+      }
+
+      function sayYes() {
+        // Show pop-up message instead of alert
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+      }
+
+      function closePopup() {
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

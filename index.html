@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ako nalang invite nimo</title>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        text-align: center;
+        padding: 50px;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 24px;
+        color: #da1d1d;
+      }
+
+      .gif-container {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40vh;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 20px;
+        position: relative;
+      }
+
+      button {
+        font-size: 20px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 10px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      #yes {
+        background-color: #ff69b4;
+        color: white;
+      }
+
+      #no {
+        background-color: #ff4d4d;
+        color: white;
+      }
+
+      @keyframes moveGif {
+        0% {
+          transform: translateX(-20px);
+        }
+        50% {
+          transform: translateX(20px);
+        }
+        100% {
+          transform: translateX(-20px);
+        }
+      }
+
+      .gif-container img {
+        width: 250px;
+        max-width: 100%;
+        animation: moveGif 2s infinite alternate ease-in-out;
+      }
+
+      .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        display: none;
+        z-index: 100;
+      }
+
+      .popup h2 {
+        color: #da1d1d;
+      }
+
+      .popup img {
+        width: 120px;
+        margin: 10px 0;
+      }
+
+      .popup button {
+        background-color: #da1d1d;
+        color: white;
+        font-size: 18px;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-top: 10px;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        display: none;
+        z-index: 99;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Will you be my Valentine?</h1>
+
+    <div class="gif-container">
+      <img
+        src="https://media.giphy.com/media/kZiDpAW9d9fr2suuS7/giphy.gif"
+        alt="Cute GIF"
+      />
+    </div>
+
+    <div class="buttons">
+      <button id="yes" onclick="sayYes()">Yes</button>
+      <button id="no" onclick="makeYesBigger()">No</button>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+      <h2>SOBRAAAAANG LATINAAAAAAAAAA!!!</h2>
+      <img
+        src="https://media.giphy.com/media/5dUllWbKVlaqmMTvHb/giphy.gif"
+        alt="Happy GIF"
+      />
+      <p>Ge mao ragd pud to lamat HAHAHAHHA</p>
+      <button onclick="closePopup()">Bogshhh</button>
+    </div>
+
+    <script>
+      let yesButton = document.getElementById("yes");
+      let noButton = document.getElementById("no");
+      let yesSize = 20;
+      let clickCount = 0;
+
+      let noTexts = [
+        "Ge nagud!",
+        "OA da!",
+        "Bahala ka!",
+        "Sure ka?",
+        "No gihapon?",
+        "I click ragud ng yes",
+        "Ginoo nay bahala nimo",
+        "Luh?",
+        "Ayaw ni i click",
+        "Kadtong  pilia!",
+      ];
+
+      function makeYesBigger() {
+        yesSize += 20;
+        yesButton.style.fontSize = yesSize + "px";
+        yesButton.style.padding = yesSize / 2 + "px " + yesSize + "px";
+
+        if (clickCount < noTexts.length) {
+          noButton.innerText = noTexts[clickCount];
+          clickCount++;
+        } else {
+          noButton.style.display = "none";
+        }
+
+        if (yesSize > 200) {
+          yesButton.style.position = "fixed";
+          yesButton.style.top = "0";
+          yesButton.style.left = "0";
+          yesButton.style.width = "100vw";
+          yesButton.style.height = "100vh";
+          yesButton.style.fontSize = "50px";
+          yesButton.style.display = "flex";
+          yesButton.style.alignItems = "center";
+          yesButton.style.justifyContent = "center";
+        }
+      }
+
+      function sayYes() {
+        document.getElementById("popup").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+      }
+
+      function closePopup() {
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

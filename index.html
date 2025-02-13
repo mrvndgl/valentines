@@ -50,11 +50,15 @@
       #yes {
         background-color: #ff69b4;
         color: white;
+        transform-origin: center;
+        transition: all 0.5s ease-in-out;
       }
 
       #no {
         background-color: #ff4d4d;
         color: white;
+        transform-origin: center;
+        transition: all 0.5s ease-in-out;
       }
 
       @keyframes moveGif {
@@ -131,7 +135,7 @@
 
     <div class="buttons">
       <button id="yes" onclick="sayYes()">Yes</button>
-      <button id="no" onclick="makeYesBigger()">No</button>
+      <button id="no" onclick="handleNoClick()">No</button>
     </div>
 
     <div class="overlay" id="overlay"></div>
@@ -148,7 +152,6 @@
     <script>
       let yesButton = document.getElementById("yes");
       let noButton = document.getElementById("no");
-      let yesSize = 20;
       let clickCount = 0;
 
       let noTexts = [
@@ -164,28 +167,40 @@
         "Kadtong  pilia!",
       ];
 
-      function makeYesBigger() {
-        yesSize += 20;
-        yesButton.style.fontSize = yesSize + "px";
-        yesButton.style.padding = yesSize / 2 + "px " + yesSize + "px";
-
+      function handleNoClick() {
         if (clickCount < noTexts.length) {
+          // Change No button text
           noButton.innerText = noTexts[clickCount];
-          clickCount++;
-        } else {
-          noButton.style.display = "none";
-        }
 
-        if (yesSize > 200) {
-          yesButton.style.position = "fixed";
-          yesButton.style.top = "0";
-          yesButton.style.left = "0";
-          yesButton.style.width = "100vw";
-          yesButton.style.height = "100vh";
-          yesButton.style.fontSize = "50px";
-          yesButton.style.display = "flex";
-          yesButton.style.alignItems = "center";
-          yesButton.style.justifyContent = "center";
+          // Calculate scaling based on progress through the array
+          const progress = (clickCount + 1) / noTexts.length;
+
+          // Shrink No button gradually
+          noButton.style.transform = `scale(${1 - progress * 0.9})`;
+
+          // Grow Yes button gradually
+          yesButton.style.transform = `scale(${1 + progress * 2})`;
+
+          // When reaching the last item
+          if (clickCount === noTexts.length - 1) {
+            setTimeout(() => {
+              yesButton.style.position = "fixed";
+              yesButton.style.top = "0";
+              yesButton.style.left = "0";
+              yesButton.style.width = "100vw";
+              yesButton.style.height = "100vh";
+              yesButton.style.margin = "0";
+              yesButton.style.borderRadius = "0";
+              yesButton.style.fontSize = "50px";
+              yesButton.style.display = "flex";
+              yesButton.style.alignItems = "center";
+              yesButton.style.justifyContent = "center";
+              yesButton.style.transform = "none";
+              noButton.style.display = "none";
+            }, 500);
+          }
+
+          clickCount++;
         }
       }
 

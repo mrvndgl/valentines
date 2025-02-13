@@ -61,6 +61,32 @@
         transition: all 0.5s ease-in-out;
       }
 
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 20px;
+        }
+
+        .gif-container img {
+          width: 80%;
+          max-width: 200px;
+        }
+
+        .buttons {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        button {
+          font-size: 16px;
+          padding: 8px 15px;
+        }
+
+        .popup {
+          max-width: 90%;
+          padding: 15px;
+        }
+      }
+
       @keyframes moveGif {
         0% {
           transform: translateX(-20px);
